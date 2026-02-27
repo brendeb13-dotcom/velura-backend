@@ -2,7 +2,11 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sqlite3
 from functools import wraps
+import os
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 from flask_jwt_extended import (
     JWTManager,
     create_access_token,
@@ -24,6 +28,7 @@ CORS(
 app.config["JWT_SECRET_KEY"] = "velura-super-secret-key"
 app.config["JWT_TOKEN_LOCATION"] = ["headers"]
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
+app.config["PROPAGATE_EXCEPTIONS"] = True
 
 jwt = JWTManager(app)
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
@@ -317,5 +322,8 @@ def debug_users():
     conn.close()
     return jsonify([dict(r) for r in rows])
 
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
