@@ -19,11 +19,7 @@ from passlib.context import CryptContext
 
 app = Flask(__name__)
 
-CORS(
-    app,
-    supports_credentials=True,
-    allow_headers=["Content-Type", "Authorization"],
-)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config["JWT_SECRET_KEY"] = "velura-super-secret-key"
 app.config["JWT_TOKEN_LOCATION"] = ["headers"]
