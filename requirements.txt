@@ -3,3 +3,4 @@ flask-cors
 flask-jwt-extended
 passlib
 gunicorn
+argon2-cffi
